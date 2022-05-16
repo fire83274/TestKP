@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <link rel="stylesheet" href="../Assets/css/style.css">
+</head>
+<body>
+    <header class="container mx-auto max-w-full">
+        <div class="hidden lg:flex flex-col justify-between font-bold text-center px-1 items-center mx-auto bg-neutral-800 text-white md:flex-row w-full">
+            <div class="flex flex-col md:flex-row justify-around pl-0 md:pl-5 lg:pl-12 xl:pl-16 2xl:pl-32">
+                <div class="px-1 py-2 delay-100 hover:text-emerald-400 sm:px-2 md:px-4"><a href="../index.html">Напитки</a></div>
+                <div class="px-1 py-2 delay-100 sm:px-2 md:px-4">+7 800 555 35 35</div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-around pr-0 md:pr-5 lg:pr-12 xl:pr-16 2xl:pr-32">
+                <div class="px-1 py-2 delay-100 hover:text-emerald-400 sm:px-2 md:px-4"><a href="about.html">О нас</a></div>
+                <div class="px-1 py-2 delay-100 hover:text-emerald-400 sm:px-2 md:px-4"><a href="stock.html">Акции</a></div>                
+            </div>
+        </div>
+        <div class="flex flex-row py-3 justify-between font-bold text-center px-1 items-center mx-auto bg-white text-white md:flex-row w-full">
+            <div class="flex flex-row w-full md:flex-row md:w-auto items-center pl-0 md:pl-5 lg:pl-12 xl:pl-16 2xl:pl-32">
+                
+                <div class="hamburger-menu pr-6">
+                  <input id="menu__toggle" type="checkbox" />
+                  <label class="menu__btn" for="menu__toggle">
+                    <span></span>
+                  </label>              
+                  <ul class="menu__box bg-emerald-400">
+                    <li><a class="menu__item" href="#">Вода</a></li>
+                    <li><a class="menu__item" href="#">Энергетические напитки</a></li>
+                    <li><a class="menu__item" href="#">Соки и морсы</a></li>
+                    <li><a class="menu__item" href="#">Квас и тоники</a></li>
+                    <li><a class="menu__item" href="#">Лимонады</a></li>
+                    <li><a class="menu__item" href="#">Сиропы и топинги</a></li>
+                    <li><a class="menu__item" href="#">Холодный чай</a></li>
+                    <li><a class="menu__item" href="#">Кофе и какао</a></li>
+                  </ul>
+                </div>     
+                <img class="w-16" src="Assets/img/icon.png" alt="">           
+            </div>
+            <input type="text" placeholder="Поиск" class="hidden md:inline-block rounded-lg w-1/2 bg-zinc-200 p-2 ml-5">
+            <div class="flex flex-row justify-around pr-0 md:pr-5 lg:pr-12 xl:pr-16 2xl:pr-32">
+                <div class="px-1 py-2 delay-100 flex flex-row hover:border-b-2 border-emerald-400 lg:px-2 xl:px-4">
+
+                    
+                      <div x-data="{ showModal : false }">
+                        
+                        <button @click="showModal = !showModal" class="flex flex-row"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
+                          fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.5001 10.2416C13.76 10.7361 12.89 11 12 11C10.8073 10.9974 9.66428 10.5224 8.82094 
+                          9.67906C7.9776 8.83572 7.50264 7.69266 7.5 6.5C7.5 5.60999 7.76392 4.73996 8.25839 3.99994C8.75285 3.25991 9.45566 2.68314 10.2779 2.34254C11.1002 
+                          2.00195 12.005 1.91283 12.8779 2.08647C13.7508 2.2601 14.5526 2.68868 15.182 3.31802C15.8113 3.94736 16.2399 4.74918 16.4135 5.6221C16.5872 6.49501 
+                          16.4981 7.39981 16.1575 8.22208C15.8169 9.04434 15.2401 9.74715 14.5001 10.2416ZM13.3889 4.42133C12.9778 4.14662 12.4945 4 12 4C11.337 4 10.7011 
+                          4.26339 10.2322 4.73223C9.76339 5.20108 9.5 5.83696 9.5 6.5C9.5 6.99446 9.64662 7.4778 9.92133 7.88893C10.196 8.30005 10.5865 8.62048 11.0433 
+                          8.8097C11.5001 8.99892 12.0028 9.04843 12.4877 8.95197C12.9727 8.8555 13.4181 8.6174 13.7678 8.26777C14.1174 7.91814 14.3555 7.47268 14.452 6.98773C14.5484
+                           6.50278 14.4989 6.00011 14.3097 5.54329C14.1205 5.08648 13.8 4.69603 13.3889 4.42133ZM5.63604 14.636C7.32387 12.9482 9.61305 12 12 12C14.3869 12 16.6761 
+                           12.9482 18.364 14.636C20.0518 16.3239 21 18.6131 21 21C21 21.2652 20.8946 21.5196 20.7071 21.7071C20.5196 21.8946 20.2652 22 20 22H15C14.7348 22 14.4804 
+                           21.8946 14.2929 21.7071C14.1054 21.5196 14 21.2652 14 21C14 20.7348 14.1054 20.4804 14.2929 20.2929C14.4804 20.1054 14.7348 20 15 20H18.93C18.6922 18.3314
+                            17.8604 16.8046 16.5874 15.7001C15.3143 14.5956 13.6854 13.9875 12 13.9875C10.3146 13.9875 8.68571 14.5956 7.41264 15.7001C6.13957 16.8046 5.30776 18.3314 
+                            5.07 20H9C9.26522 20 9.51957 20.1054 9.70711 20.2929C9.89464 20.4804 10 20.7348 10 21C10 21.2652 9.89464 21.5196 9.70711 21.7071C9.51957 21.8946 9.26522 
+                            22 9 22H4C3.73478 22 3.48043 21.8946 3.29289 21.7071C3.10536 21.5196 3 21.2652 3 21C3 18.6131 3.94821 16.3239 5.63604 14.636Z" fill="#0DB14B"></path></svg>
+                            <span class="hidden text-zinc-900 2xl:inline-block font-bold"> Войти</span></button>
+                
+                        
+                        <div x-show="showModal" class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0" x-transition:enter="transition ease duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+                            
+                            <div x-show="showModal" class="bg-white flex flex-col rounded-xl shadow-2xl p-6 md:w-1/2 lg:w-1/4 mx-10" @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform" x-transition:enter-start="opacity-0 scale-90 translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease duration-100 transform" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-90 translate-y-1">
+                                
+                                <span class="font-bold block text-2xl mb-3 text-black flex-row items-center">Войти или зарегистрироваться</span>
+                                
+                                <p class="mb-3">Чтобы сохранять корзину, получать промокоды и следить за историей покупок</p>
+                                <input type="text" placeholder="Номер телефона" class="rounded-lg w-full mx-auto bg-zinc-200 p-2">
+                                <div class="flex flex-row w-full justify-center"><button class="bg-emerald-400 text-white rounded-lg p-4 font-bold mt-4 w-full xl:w-1/2">Получить код</button></div>                                
+                                <a href="" class="text-emerald-400 my-10">Войти по паролю или соц.сети</a>
+                                <div class="border border-zinc-200"></div>
+                                <a href="" class="text-emerald-400 my-10">Зарегистрироваться как юр.лицо</a>
+                                <a href="" class="text-emerald-400">Нужна помощь?</a>
+                                <div class="text-right space-x-5 mt-5">
+                                    <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Закрыть</button>                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+                <a href="favourites.html" class="px-1 py-2 delay-100 flex flex-row hover:border-b-2 border-emerald-400 lg:px-2 xl:px-4">
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                        focusable="false" class="ng-tns-c340-5"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.43 20.89c.181.072.375.11.57.11a1.65 1.65 0 00.59-.14c7.55-3.05
+                         10.09-8.65 9.26-12.86a5.78 5.78 0 00-5.66-5A7.88 7.88 0 0012 4.39 7.8 7.8 0 007.82 3a5.77 5.77 0 00-5.69 5.05c-.83 4.24 1.72 9.84 9.3 12.84zM4 8.45A3.85 
+                         3.85 0 017.82 5a6.4 6.4 0 013.64 1.4l.54.4.56-.42A6.38 6.38 0 0116.19 5 3.88 3.88 0 0120 8.44c.64 3.36-1.58 7.91-8 10.54-6.45-2.53-8.67-7.14-8-10.53z"
+                          fill="#0DB14B" class="ng-tns-c340-5"></path></svg>
+                  <span class="hidden text-zinc-900 2xl:inline-block"> Избранное</span>
+                </a>           
+                <a href="cart.html" class="px-1 py-2 delay-100 flex flex-row hover:border-b-2 border-emerald-400 lg:px-2 xl:px-4">
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" 
+                      xmlns="http://www.w3.org/2000/svg" focusable="false" class="ng-tns-c340-5"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.49 3H2a1 1 0 000 2h3.85l-.68 
+                      8.85a2 2 0 002 2.15h12.24a2 2 0 001.95-1.55l2.07-9A2 2 0 0021.49 3zm-2.08 11H7.16l.69-9h13.64l-2.08 9zM9 21a2 2 0 100-4 2 2 0 000 4zm9 0a2 2 0 100-4 2 2 0 000 4z"
+                       fill="#0DB14B" class="ng-tns-c340-5"></path></svg>
+                  <span class="hidden text-zinc-900 2xl:inline-block"> Корзина</span>
+                </a>       
+            </div>
+        </div>
+    </header>
+
+    <div class="container flex flex-col lg:flex-row mx-auto my-32 h-1/2 items-center justify-center w-1/2">
+        <img src="../Assets/advantages-main/1.png" alt="" class="w-64">
+        <div class="flex flex-col lg:ml-32">
+            <h1 class="text-2xl font-bold mt-4">В корзине пока нет товаров</h1>
+            <p>Перейдите в каталог, посмотрите скидки или воспользуйтесь поиском, чтобы найти нужный товар.</p>
+            <a href="" class="bg-emerald-400 text-white rounded-lg p-4 font-bold mt-4 lg:w-1/2 text-center">Начать покупки</a>
+        </div>
+    </div>
+    <div class="container mx-auto mt-10">
+        <h1 class="text-2xl font-bold mt-4 ml-6">Возможно вы забыли заказать</h1>
+    </div>
+    <div class="mx-auto container mt-10 items-center flex flex-col lg:flex-row">
+        <div class="max-w-sm bg-white rounded-lg shadow-md mx-2 my-2">
+            <a href="#">
+                <img class="p-8 rounded-t-lg lg:w-60 lg:h-60" src="../Assets/categories-main/sok.webp" alt="Изображение продукта" />
+            </a>
+            <div class="px-5 pb-5">
+                <a href="#">
+                    <h5 class="text-xl font-semibold tracking-tight text-zinc-900">Напиток №1</h5>
+                </a>
+                <div class="flex items-center mt-10 mb-5">
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-3xl font-bold text-zinc-900">500₽</span>
+                    <button id="test">
+                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                    <path d="M11.9999 21.0002C11.8805 21.0013 11.762 20.9809 11.6499 20.9402C11.3599 20.8302 11.0799 20.7102 10.7899 20.5802C8.21053 19.3688 5.95288 17.5668 4.19986 15.3202C3.7481 14.7352 3.34667 14.113 2.99986 13.4602C2.37862 12.2838 2.03645 10.9801 1.99986 9.65021C1.94945 8.66415 2.11992 7.67928 2.49881 6.76752C2.8777 5.85576 3.45545 5.04014 4.18986 4.38021L4.41986 4.19021C5.44832 3.40774 6.70762 2.98914 7.99986 3.00021C9.5013 3.00732 10.9391 3.6076 11.9999 4.67021C13.0606 3.6076 14.4984 3.00732 15.9999 3.00021C17.2887 2.99136 18.5441 3.40984 19.5699 4.19021L19.7199 4.31021L19.7999 4.38021C20.5361 5.03919 21.1157 5.8544 21.4964 6.7662C21.877 7.67801 22.049 8.66337 21.9999 9.65021C21.9633 10.9801 21.6211 12.2838 20.9999 13.4602C19.216 16.586 16.4992 19.0755 13.2299 20.5802C12.9399 20.7102 12.6599 20.8302 12.3699 20.9402C12.2514 20.9834 12.1259 21.0037 11.9999 21.0002ZM7.99986 5.00021C7.15599 4.98992 6.33271 5.26083 5.65986 5.77021L5.55986 5.85021C5.03721 6.32413 4.62619 6.90809 4.35644 7.56001C4.08668 8.21192 3.96489 8.91556 3.99986 9.62021C4.03519 10.6426 4.30916 11.6426 4.79986 12.5402C5.08628 13.092 5.42092 13.6174 5.79986 14.1102C7.34697 16.0965 9.34102 17.6897 11.6199 18.7602L11.9999 18.9202L12.3799 18.7602C15.2474 17.4507 17.6325 15.2754 19.1999 12.5402C19.6906 11.6426 19.9645 10.6426 19.9999 9.62021C20.0384 8.92804 19.9239 8.23589 19.6647 7.59295C19.4054 6.95001 19.0077 6.37207 18.4999 5.90021L18.3699 5.80021C17.6928 5.27373 16.8575 4.99178 15.9999 5.00021C15.3654 4.99599 14.7413 5.16044 14.1913 5.47672C13.6413 5.793 13.1853 6.24975 12.8699 6.80021C12.7842 6.95897 12.6571 7.09158 12.5022 7.18401C12.3473 7.27644 12.1703 7.32524 11.9899 7.32524C11.8095 7.32524 11.6324 7.27644 11.4775 7.18401C11.3226 7.09158 11.1955 6.95897 11.1099 6.80021C10.7961 6.25271 10.3432 5.79786 9.79705 5.48176C9.2509 5.16566 8.63089 4.99953 7.99986 5.00021Z" fill="#95999B"></path>
+                    </svg>
+                    </button>
+                    <a href="#" class="text-white bg-emerald-400 hover:bg-emerald-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Купить</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-sm bg-white rounded-lg shadow-md mx-2 my-2">
+            <a href="#">
+                <img class="p-8 rounded-t-lg lg:w-60 lg:h-60" src="../Assets/categories-main/chay.webp" alt="Изображение продукта" />
+            </a>
+            <div class="px-5 pb-5">
+                <a href="#">
+                    <h5 class="text-xl font-semibold tracking-tight text-zinc-900">Напиток №2</h5>
+                </a>
+                <div class="flex items-center mt-10 mb-5">
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-3xl font-bold text-zinc-900">500₽</span>
+                    <button id="test">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                    <path d="M11.9999 21.0002C11.8805 21.0013 11.762 20.9809 11.6499 20.9402C11.3599 20.8302 11.0799 20.7102 10.7899 20.5802C8.21053 19.3688 5.95288 17.5668 4.19986 15.3202C3.7481 14.7352 3.34667 14.113 2.99986 13.4602C2.37862 12.2838 2.03645 10.9801 1.99986 9.65021C1.94945 8.66415 2.11992 7.67928 2.49881 6.76752C2.8777 5.85576 3.45545 5.04014 4.18986 4.38021L4.41986 4.19021C5.44832 3.40774 6.70762 2.98914 7.99986 3.00021C9.5013 3.00732 10.9391 3.6076 11.9999 4.67021C13.0606 3.6076 14.4984 3.00732 15.9999 3.00021C17.2887 2.99136 18.5441 3.40984 19.5699 4.19021L19.7199 4.31021L19.7999 4.38021C20.5361 5.03919 21.1157 5.8544 21.4964 6.7662C21.877 7.67801 22.049 8.66337 21.9999 9.65021C21.9633 10.9801 21.6211 12.2838 20.9999 13.4602C19.216 16.586 16.4992 19.0755 13.2299 20.5802C12.9399 20.7102 12.6599 20.8302 12.3699 20.9402C12.2514 20.9834 12.1259 21.0037 11.9999 21.0002ZM7.99986 5.00021C7.15599 4.98992 6.33271 5.26083 5.65986 5.77021L5.55986 5.85021C5.03721 6.32413 4.62619 6.90809 4.35644 7.56001C4.08668 8.21192 3.96489 8.91556 3.99986 9.62021C4.03519 10.6426 4.30916 11.6426 4.79986 12.5402C5.08628 13.092 5.42092 13.6174 5.79986 14.1102C7.34697 16.0965 9.34102 17.6897 11.6199 18.7602L11.9999 18.9202L12.3799 18.7602C15.2474 17.4507 17.6325 15.2754 19.1999 12.5402C19.6906 11.6426 19.9645 10.6426 19.9999 9.62021C20.0384 8.92804 19.9239 8.23589 19.6647 7.59295C19.4054 6.95001 19.0077 6.37207 18.4999 5.90021L18.3699 5.80021C17.6928 5.27373 16.8575 4.99178 15.9999 5.00021C15.3654 4.99599 14.7413 5.16044 14.1913 5.47672C13.6413 5.793 13.1853 6.24975 12.8699 6.80021C12.7842 6.95897 12.6571 7.09158 12.5022 7.18401C12.3473 7.27644 12.1703 7.32524 11.9899 7.32524C11.8095 7.32524 11.6324 7.27644 11.4775 7.18401C11.3226 7.09158 11.1955 6.95897 11.1099 6.80021C10.7961 6.25271 10.3432 5.79786 9.79705 5.48176C9.2509 5.16566 8.63089 4.99953 7.99986 5.00021Z" fill="#95999B"></path>
+                    </svg>
+                    </button>
+                    <a href="#" class="text-white bg-emerald-400 hover:bg-emerald-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Купить</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-sm bg-white rounded-lg shadow-md mx-2 my-2">
+            <a href="#">
+                <img class="p-8 rounded-t-lg lg:w-60 lg:h-60" src="../Assets/categories-main/voda.png" alt="Изображение продукта" />
+            </a>
+            <div class="px-5 pb-5">
+                <a href="#">
+                    <h5 class="text-xl font-semibold tracking-tight text-zinc-900">Напиток №3</h5>
+                </a>
+                <div class="flex items-center mt-10 mb-5">
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-3xl font-bold text-zinc-900">500₽</span>
+                    <button id="test">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                    <path d="M11.9999 21.0002C11.8805 21.0013 11.762 20.9809 11.6499 20.9402C11.3599 20.8302 11.0799 20.7102 10.7899 20.5802C8.21053 19.3688 5.95288 17.5668 4.19986 15.3202C3.7481 14.7352 3.34667 14.113 2.99986 13.4602C2.37862 12.2838 2.03645 10.9801 1.99986 9.65021C1.94945 8.66415 2.11992 7.67928 2.49881 6.76752C2.8777 5.85576 3.45545 5.04014 4.18986 4.38021L4.41986 4.19021C5.44832 3.40774 6.70762 2.98914 7.99986 3.00021C9.5013 3.00732 10.9391 3.6076 11.9999 4.67021C13.0606 3.6076 14.4984 3.00732 15.9999 3.00021C17.2887 2.99136 18.5441 3.40984 19.5699 4.19021L19.7199 4.31021L19.7999 4.38021C20.5361 5.03919 21.1157 5.8544 21.4964 6.7662C21.877 7.67801 22.049 8.66337 21.9999 9.65021C21.9633 10.9801 21.6211 12.2838 20.9999 13.4602C19.216 16.586 16.4992 19.0755 13.2299 20.5802C12.9399 20.7102 12.6599 20.8302 12.3699 20.9402C12.2514 20.9834 12.1259 21.0037 11.9999 21.0002ZM7.99986 5.00021C7.15599 4.98992 6.33271 5.26083 5.65986 5.77021L5.55986 5.85021C5.03721 6.32413 4.62619 6.90809 4.35644 7.56001C4.08668 8.21192 3.96489 8.91556 3.99986 9.62021C4.03519 10.6426 4.30916 11.6426 4.79986 12.5402C5.08628 13.092 5.42092 13.6174 5.79986 14.1102C7.34697 16.0965 9.34102 17.6897 11.6199 18.7602L11.9999 18.9202L12.3799 18.7602C15.2474 17.4507 17.6325 15.2754 19.1999 12.5402C19.6906 11.6426 19.9645 10.6426 19.9999 9.62021C20.0384 8.92804 19.9239 8.23589 19.6647 7.59295C19.4054 6.95001 19.0077 6.37207 18.4999 5.90021L18.3699 5.80021C17.6928 5.27373 16.8575 4.99178 15.9999 5.00021C15.3654 4.99599 14.7413 5.16044 14.1913 5.47672C13.6413 5.793 13.1853 6.24975 12.8699 6.80021C12.7842 6.95897 12.6571 7.09158 12.5022 7.18401C12.3473 7.27644 12.1703 7.32524 11.9899 7.32524C11.8095 7.32524 11.6324 7.27644 11.4775 7.18401C11.3226 7.09158 11.1955 6.95897 11.1099 6.80021C10.7961 6.25271 10.3432 5.79786 9.79705 5.48176C9.2509 5.16566 8.63089 4.99953 7.99986 5.00021Z" fill="#95999B"></path>
+                    </svg>
+                    </button>
+                    <a href="#" class="text-white bg-emerald-400 hover:bg-emerald-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Купить</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-sm bg-white rounded-lg shadow-md mx-2 my-2">
+            <a href="#">
+                <img class="p-8 rounded-t-lg lg:w-60 lg:h-60" src="../Assets/categories-main/energy.png" alt="Изображение продукта" />
+            </a>
+            <div class="px-5 pb-5">
+                <a href="#">
+                    <h5 class="text-xl font-semibold tracking-tight text-zinc-900">Напиток №4</h5>
+                </a>
+                <div class="flex items-center mt-10 mb-5">
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-3xl font-bold text-zinc-900">500₽</span>
+                    <button id="test">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                    <path d="M11.9999 21.0002C11.8805 21.0013 11.762 20.9809 11.6499 20.9402C11.3599 20.8302 11.0799 20.7102 10.7899 20.5802C8.21053 19.3688 5.95288 17.5668 4.19986 15.3202C3.7481 14.7352 3.34667 14.113 2.99986 13.4602C2.37862 12.2838 2.03645 10.9801 1.99986 9.65021C1.94945 8.66415 2.11992 7.67928 2.49881 6.76752C2.8777 5.85576 3.45545 5.04014 4.18986 4.38021L4.41986 4.19021C5.44832 3.40774 6.70762 2.98914 7.99986 3.00021C9.5013 3.00732 10.9391 3.6076 11.9999 4.67021C13.0606 3.6076 14.4984 3.00732 15.9999 3.00021C17.2887 2.99136 18.5441 3.40984 19.5699 4.19021L19.7199 4.31021L19.7999 4.38021C20.5361 5.03919 21.1157 5.8544 21.4964 6.7662C21.877 7.67801 22.049 8.66337 21.9999 9.65021C21.9633 10.9801 21.6211 12.2838 20.9999 13.4602C19.216 16.586 16.4992 19.0755 13.2299 20.5802C12.9399 20.7102 12.6599 20.8302 12.3699 20.9402C12.2514 20.9834 12.1259 21.0037 11.9999 21.0002ZM7.99986 5.00021C7.15599 4.98992 6.33271 5.26083 5.65986 5.77021L5.55986 5.85021C5.03721 6.32413 4.62619 6.90809 4.35644 7.56001C4.08668 8.21192 3.96489 8.91556 3.99986 9.62021C4.03519 10.6426 4.30916 11.6426 4.79986 12.5402C5.08628 13.092 5.42092 13.6174 5.79986 14.1102C7.34697 16.0965 9.34102 17.6897 11.6199 18.7602L11.9999 18.9202L12.3799 18.7602C15.2474 17.4507 17.6325 15.2754 19.1999 12.5402C19.6906 11.6426 19.9645 10.6426 19.9999 9.62021C20.0384 8.92804 19.9239 8.23589 19.6647 7.59295C19.4054 6.95001 19.0077 6.37207 18.4999 5.90021L18.3699 5.80021C17.6928 5.27373 16.8575 4.99178 15.9999 5.00021C15.3654 4.99599 14.7413 5.16044 14.1913 5.47672C13.6413 5.793 13.1853 6.24975 12.8699 6.80021C12.7842 6.95897 12.6571 7.09158 12.5022 7.18401C12.3473 7.27644 12.1703 7.32524 11.9899 7.32524C11.8095 7.32524 11.6324 7.27644 11.4775 7.18401C11.3226 7.09158 11.1955 6.95897 11.1099 6.80021C10.7961 6.25271 10.3432 5.79786 9.79705 5.48176C9.2509 5.16566 8.63089 4.99953 7.99986 5.00021Z" fill="#95999B"></path>
+                    </svg>
+                    </button>
+                    <a href="#" class="text-white bg-emerald-400 hover:bg-emerald-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Купить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center bg-emerald-400 text-zinc-900 mt-10">
+        <div class="container px-6 pt-6 mx-auto">
+          <div class="flex mb-6 mx-3 flex-row justify-center">
+            <a href="#!" type="button" class="rounded-full border-2 border-zinc-900 text-zinc-900 leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+              <svg aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="facebook-f"
+              class="w-2 h-full mx-auto"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+            >
+              <path
+                fill="currentColor"
+                d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+              ></path>
+              </svg>
+            </a>
+      
+            <a href="#!" type="button" class="rounded-full border-2 border-zinc-900 text-zinc-900 leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+              <svg aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+                data-icon="twitter"
+                class="w-3 h-full mx-auto"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                ></path>
+              </svg>
+            </a>
+      
+            <a href="#!" type="button" class="rounded-full border-2 border-zinc-900 text-zinc-900 leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+              <svg aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+                data-icon="google"
+                class="w-3 h-full mx-auto"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 488 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
+                ></path>
+              </svg>
+            </a>
+      
+            <a href="#!" type="button" class="rounded-full border-2 border-zinc-900 text-zinc-900 leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+              <svg aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="instagram"
+                class="w-3 h-full mx-auto"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                ></path>
+              </svg>
+            </a>
+      
+            <a href="#!" type="button" class="rounded-full border-2 border-zinc-900 text-zinc-900 leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+              <svg aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="linkedin-in"
+                class="w-3 h-full mx-auto"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                ></path>
+              </svg>
+            </a>
+      
+            <a href="#!" type="button" class="rounded-full border-2 border-zinc-900 text-zinc-900 leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+              <svg aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="github"
+                class="w-3 h-full mx-auto"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 496 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+      
+          <div>
+            <form action="">
+              <div class="grid md:grid-cols-3 gird-cols-1 gap-4 flex items-center">
+                <div class="md:ml-auto md:mb-6 mx-3">
+                  <p class="">
+                    <strong>Лучшие предложения у вас в почте</strong>
+                  </p>
+                </div>
+      
+                <div class="md:mb-6 mx-3">
+                  <input
+                    type="text"
+                    class="
+                      form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                    "
+                    id="exampleFormControlInput1"
+                    placeholder="Email"/>
+                </div>
+      
+                <div class="md:mr-auto mb-6 mx-3">
+                  <button type="submit" class="inline-block px-6 py-2 border-2 border-zinc-900 text-zinc-900 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+                    Подписаться
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+      
+        
+      
+          
+          <div class="grid lg:grid-cols-4 md:grid-cols-2 text-left">
+            <div class="flex flex-col lg:items-center">
+              <div class="mb-6 mx-3">
+                <h5 class="uppercase font-bold mb-2.5">О компании</h5>
+        
+                <ul class="list-none mb-0">
+                  <li>
+                    <a href="#!" class="text-zinc-900">Поставщикам</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-zinc-900">Контакты</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-zinc-900">Новости</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-zinc-900">Пользоваетельское соглашение</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+  
+            <div class="flex flex-col lg:items-center">
+              <div class="mb-6 mx-3">
+                <h5 class="uppercase font-bold mb-2.5">Покупателям</h5>
+        
+                <ul class="list-none mb-0">
+                  <li>
+                    <a href="#!" class="text-zinc-900">Как заказать</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-zinc-900">Как вернуть</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-zinc-900">Вопросы ответы</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-zinc-900">Доставка и оплата</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+  
+            <div class="flex flex-col lg:items-center">
+              <div class="mb-6 mx-3">
+                <h5 class="uppercase font-bold mb-2.5">Телефон круглосуточной связи</h5>
+        
+                <ul class="list-none mb-0">
+                  <li>
+                    <a href="#!" class="text-zinc-900">8-800-555-35-35</a>
+                  </li>              
+                </ul>
+              </div>
+            </div>
+  
+            <div class="flex flex-col lg:items-center">
+              <div class="mb-6 mx-3">
+                <h5 class="uppercase font-bold mb-2.5">Телефон для заказа</h5>
+        
+                <ul class="list-none mb-0">
+                  <li>
+                    <a href="#!" class="text-zinc-900">8-495-775-20-20</a>
+                  </li>               
+                </ul>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2022 Copyright:
+          <a class="text-zinc-900" href="">Напитки</a>
+        </div>
+      </footer>
+</body>
+</html>
